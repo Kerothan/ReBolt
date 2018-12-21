@@ -1,0 +1,37 @@
+<div id="sidebar">
+  <strong>STATS!!!</strong><br/><br/>
+  Core Level: {{coreLvl}}<br/>
+  Raw materials: {{rawMat}}<br/>
+  Drones: {{droneCount}}<br/>
+  <br/>
+  Available power: {{power}}<br/>
+</div>
+<div id="gameview">
+  <ngx-tabset>
+    <ngx-tab tabTitle="Processing Core">
+      
+        <app-core></app-core>
+      
+    </ngx-tab>
+    <ngx-tab tabTitle="Construction">
+      
+        <app-build></app-build>
+      
+    </ngx-tab>
+    <ngx-tab tabTitle="Research">
+      
+        <app-research></app-research>
+      
+    </ngx-tab>
+    <ngx-tab tabTitle="Unit upgrades">
+      
+        <app-units></app-units>
+      
+    </ngx-tab>
+    <ngx-tab tabTitle="Manufacturing">
+      
+        <app-manufacturing></app-manufacturing>
+      
+    </ngx-tab>
+  </ngx-tabset>
+</div>

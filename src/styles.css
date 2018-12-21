@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+html,body{
+    margin:0;
+    padding:0;
+}
+
+#sidebar {
+    padding: 10px;
+    height:100vh;
+    float:left;
+    width:250px;
+    border-style: solid;
+}
+
+#gameview {
+    padding:10px;
+    height:100vh;
+    width:calc(100vw-255px);
+    position: absolute;
+    left:255px;
+}
+
