@@ -19,6 +19,11 @@ export class Tick {
         this.weaponsPerTick=weaponsPerTick;
     }
 
+    /**
+     * Updates inventory based on production per tick up to maximum
+     * @param inv inventory object passed from game component
+     * @param max maximum object passed from game component
+     */
     tick (inv:Inventory,max:Maximum) {
         if (inv.rawMats<max.maxRawMats){
             if (inv.rawMats + this.rawMatsperTick > max.maxRawMats)

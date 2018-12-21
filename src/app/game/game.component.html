@@ -1,8 +1,10 @@
 <div id="sidebar">
   <strong>STATS!!!</strong><br/><br/>
   Core Level: {{core.level}}<br/>
-  Raw materials: {{inventory.rawMats}}<br/>
+  Raw materials: {{inventory.rawMats}}/{{max.maxRawMats}}<br/><br/>
+  Used space: {{core.usedSpace}}/{{core.space}}<br/><br/>  
   Drones: {{units.drones}}<br/>
+
   <br/>
   Available power: {{inventory.power}}<br/>
 </div>
@@ -10,7 +12,7 @@
   <ngx-tabset>
     <ngx-tab tabTitle="Processing Core">
       
-        <app-core [inv]="inventory" [core]="core" [unit]="units"></app-core>
+        <app-core [inv]="inventory" [core]="core" [unit]="units" (useSpace)="core.useSpace($event)"></app-core>
       
     </ngx-tab>
     <ngx-tab tabTitle="Construction">
