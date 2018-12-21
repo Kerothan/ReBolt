@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
+import { Inventory } from '../models/inventory';
+import { Maximum } from '../models/maximums';
+import { Core } from '../models/core';
+import { Units } from '../models/units';
+import { Tick } from '../models/tick';
 
 @Component({
   selector: 'app-game',
@@ -8,26 +13,18 @@ import { timer } from 'rxjs';
 })
 export class GameComponent implements OnInit {
 
-  private source = timer(1000,1000);
-  private subscribe = this.source.subscribe(() => this.tick())
+  private inventory: Inventory = new Inventory();
+  private max: Maximum = new Maximum();
+  private core: Core = new Core();
+  private units: Units = new Units();
+  private ticker: Tick = new Tick();
 
-  private coreLvl: number = 1;
-  private rawMat: number = 0;
-  private rawMatMax: number = 100;
-  private rawMatperTick: number = 1;
-  private droneCount: number = 0;
-  private power: number = 0;
+  private source = timer(1000,1000);
+  private subscribe = this.source.subscribe(() => this.ticker.tick(this.inventory,this.max))
   
   constructor() { }
 
   ngOnInit() {
   }
 
-  tick () {
-    if (this.rawMat < this.rawMatMax) {
-      if (this.rawMat + this.rawMatperTick > this.rawMatMax)
-        this.rawMat = this.rawMatMax;
-      else this.rawMat += this.rawMatperTick
-    }
-  }
 }
