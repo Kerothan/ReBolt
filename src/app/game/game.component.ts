@@ -5,6 +5,7 @@ import { Maximum } from '../models/maximums';
 import { Core } from '../models/core';
 import { Units } from '../models/units';
 import { Tick } from '../models/tick';
+import { Structures } from '../models/structures';
 
 @Component({
   selector: 'app-game',
@@ -14,11 +15,12 @@ import { Tick } from '../models/tick';
 export class GameComponent implements OnInit {
 
   //instantiate models
-  private inventory: Inventory = new Inventory();
-  private max: Maximum = new Maximum();
-  private core: Core = new Core();
-  private units: Units = new Units();
-  private ticker: Tick = new Tick();
+  inventory: Inventory = new Inventory();
+  max: Maximum = new Maximum();
+  core: Core = new Core();
+  units: Units = new Units();
+  ticker: Tick = new Tick();
+  structures: Structures = new Structures();
 
   //timer to tick resources every second
   private source = timer(1000,1000);
@@ -27,6 +29,18 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  buy(item:string){
+    let purchase;
+    if(!!this.structures.stats[item]) purchase = this.structures;
+    if(!!this.units.stats[item]) purchase = this.units;
+    this.inventory.invTypes.forEach(x=>{
+      if(!!purchase.stats[item].invCost[x]){
+        this.inventory[x]-=purchase.stats[item].invCost[x];
+      }
+    });
+    purchase.counts[item]+=1;
   }
 
 }

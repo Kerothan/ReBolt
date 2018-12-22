@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Inventory } from 'src/app/models/inventory';
 import { Core } from 'src/app/models/core';
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Units } from 'src/app/models/units';
 
 @Component({
@@ -14,8 +13,7 @@ export class CoreComponent implements OnInit {
   @Input() inv: Inventory;
   @Input() core: Core;
   @Input() unit: Units;
-  @Output() useSpace = new EventEmitter<number>();
-
+  
   droneCost:number = 2;
   droneSpace:number = .5;
 
@@ -38,7 +36,7 @@ export class CoreComponent implements OnInit {
    */
   buyDrone() {
     this.inv.rawMats -= this.droneCost;
-    this.unit.drones += 1;
-    this.useSpace.emit(.5);
+    this.unit.counts.drones += 1;
+    this.core.useSpace(.5);
   }
 }

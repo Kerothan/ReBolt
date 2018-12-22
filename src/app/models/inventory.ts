@@ -7,6 +7,15 @@ export class Inventory {
     fuel: number;
     weapons: number;
 
+    invTypes = [
+        'rawMats',
+        'iron',
+        'coal',
+        'oil',
+        'fuel',
+        'weapons'
+    ]
+
     constructor (rawMats=0,power=10,iron=0,coal=0,oil=0,fuel=0,weapons=0) {
         this.rawMats=rawMats;
         this.power=power;

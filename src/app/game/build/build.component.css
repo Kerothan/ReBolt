@@ -1,0 +1,9 @@
+.buildbubble {
+    height:100px;
+    width:250px;
+    border-style: solid;
+}
+
+.buildbubble > button {
+    float: left;
+}

@@ -3,7 +3,9 @@
   Core Level: {{core.level}}<br/>
   Raw materials: {{inventory.rawMats}}/{{max.maxRawMats}}<br/><br/>
   Used space: {{core.usedSpace}}/{{core.space}}<br/><br/>  
-  Drones: {{units.drones}}<br/>
+  Drones: {{units.drones}}<br/><br/>
+  diggers: {{structures.counts.digger}}<br/>
+  crates: {{structures.counts.crates}}
 
   <br/>
   Available power: {{inventory.power}}<br/>
@@ -12,12 +14,12 @@
   <ngx-tabset>
     <ngx-tab tabTitle="Processing Core">
       
-        <app-core [inv]="inventory" [core]="core" [unit]="units" (useSpace)="core.useSpace($event)"></app-core>
+        <app-core [inv]="inventory" [core]="core" [unit]="units"></app-core>
       
     </ngx-tab>
     <ngx-tab tabTitle="Construction">
       
-        <app-build></app-build>
+        <app-build [structures]="structures" [inv]="inventory" (buyOutput)="buy($event)"></app-build>
       
     </ngx-tab>
     <ngx-tab tabTitle="Research">

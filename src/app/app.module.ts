@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/Router';
+import { RouterModule } from '@angular/router';
 import { TabsModule } from 'ngx-tabset';
 
 import { AppComponent } from './app.component';
