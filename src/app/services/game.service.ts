@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Inventory } from '../models/inventory';
-import { statGroups } from '../models/details';
+import { statGroups, buyCategories } from '../models/details';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +13,22 @@ export class GameService {
     return Object.keys(obj).map(key=>{return key})
   }
 
-  validateBuy(purchase:string,inv:Inventory):boolean{
+  validateBuy(purchase:string,inv:Inventory,cat:buyCategories):boolean{
     let valid: boolean = true;
-    if (purchase != 'drones' && inv.builds.drones.count==0) return false;
-    this.genArray(inv.builds[purchase]).forEach(stat=>{
-      let purchasereq=inv.builds[purchase][stat];
+    if (purchase != 'drones' && inv.units.drones.count==0) return false;
+    this.genArray(inv[cat][purchase]).forEach(stat=>{
+      let purchasereq=inv[cat][purchase][stat];
       switch (stat){
       case statGroups.invCost:
         this.genArray(purchasereq).forEach(mat=>{
-          if (purchasereq[mat]>inv[mat]) {
+          if (purchasereq[mat]>inv[mat].amt) {
             valid = false
           };
         })
         break;
       case statGroups.unitCost:
         this.genArray(purchasereq).forEach(mat=>{
-          if (purchasereq[mat]>inv.builds[mat].count) {
+          if (purchasereq[mat]>inv.units[mat].count) {
             valid = false
           };
         })
@@ -44,20 +44,20 @@ export class GameService {
     return valid;;
   }
 
-  buy(purchase:string,inv:Inventory){
-    this.genArray(inv.builds[purchase]).forEach(stat=>{
-      let purchasereq=inv.builds[purchase][stat];
+  buy(purchase:string,inv:Inventory,cat:buyCategories){
+    this.genArray(inv[cat][purchase]).forEach(stat=>{
+      let purchasereq=inv[cat][purchase][stat];
       switch (stat){
         case statGroups.invCost:
           this.genArray(purchasereq).forEach(mat=>{
-            inv[mat] -= purchasereq[mat];
+            inv[mat].amt -= purchasereq[mat];
           })
           break;
         case statGroups.unitCost:
           this.genArray(purchasereq).forEach(mat=>{
-            inv.builds[mat].count -= purchasereq[mat];
-            if (!!inv.builds[mat].staticCost.usedSpace)
-              this.releaseSpace(inv.builds[mat].staticCost.usedSpace.amt,inv);
+            inv.units[mat].count -= purchasereq[mat];
+            if (!!inv.units[mat].staticCost.usedSpace)
+              this.releaseSpace(inv.units[mat].staticCost.usedSpace.amt,inv);
           })
           break;
         case statGroups.staticCost:
@@ -68,7 +68,7 @@ export class GameService {
       }
       //TODO Provides and Storage increases
     });
-    inv.builds[purchase].count+=1;
+    inv[cat][purchase].count+=1;
   }
 
   releaseSpace(amt:number,inv:Inventory) {

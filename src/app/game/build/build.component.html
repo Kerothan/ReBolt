@@ -1,9 +1,19 @@
-<h1>BUILD STUFF!!!</h1>>
-<div class="buildbubble">
-  <div class="name">digger</div>
-  <button (click)="buy('digger')" [disabled]="!validateBuy('digger')">Buy</button>
-</div>
-<div class="buildbubble">
-  <div class="name">crates</div>
-  <button (click)="buy('crates')" [disabled]="!validateBuy('crates')">Buy</button>
+<h1>BUILD STUFF!!!</h1>
+
+<div class="buildbubble" *ngFor="let struct of gameSvc.genArray(this.inv.structs)">
+  <div class="name">{{struct}}</div>
+  <ng-container *ngFor="let cat of gameSvc.genArray(this.inv.structs[struct])">
+    <ng-container *ngIf="isCat(cat,'invCost')">
+      <ul *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">{{inv[comp].dispName}}: {{inv.structs[struct][cat][comp]}}</ul>
+    </ng-container>
+    <ng-container *ngIf="isCat(cat,'unitCost')">
+      <ul *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">{{comp}}: {{inv.structs[struct][cat][comp]}}</ul>
+    </ng-container>
+    <ng-container *ngIf="isCat(cat,'staticCost')">
+      <ul *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">
+        {{inv.structs[struct][cat][comp].res}}: {{inv.structs[struct][cat][comp].amt}}
+      </ul>
+    </ng-container>
+  </ng-container>
+  <button (click)="buy(struct)" [disabled]="!validateBuy(struct)">Buy</button>
 </div>

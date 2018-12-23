@@ -1,11 +1,11 @@
 <div id="sidebar">
   <strong>STATS!!!</strong><br/><br/>
   Core Level: {{core.level}}<br/>
-  Raw materials: {{inventory.rawMats}}/{{max.maxRawMats}}<br/><br/>
+  Raw materials: {{inventory.rawMats.amt}}/{{inventory.rawMats.max}}<br/><br/>
   Used space: {{inventory.usedSpace}}/{{inventory.space}}<br/><br/>  
-  Drones: {{inventory.builds.drones.count}}<br/><br/>
-  diggers: {{inventory.builds.digger.count}}<br/>
-  crates: {{inventory.builds.crates.count}}
+  Drones: {{inventory.units.drones.count}}<br/><br/>
+  diggers: {{inventory.structs.digger.count}}<br/>
+  crates: {{inventory.structs.crates.count}}
 
   <br/>
   Available power: {{inventory.power}}<br/>
@@ -36,6 +36,9 @@
       
         <app-manufacturing></app-manufacturing>
       
+    </ngx-tab>
+    <ngx-tab tabTitle="Claim new lands!">
+        <p>Coming soon</p>
     </ngx-tab>
   </ngx-tabset>
 </div>

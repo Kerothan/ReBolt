@@ -1,5 +1,3 @@
-import { Core } from "./core";
-import { Maximum } from "./maximums";
 import { Inventory } from "./inventory";
 
 export class Tick {
@@ -24,11 +22,11 @@ export class Tick {
      * @param inv inventory object passed from game component
      * @param max maximum object passed from game component
      */
-    tick (inv:Inventory,max:Maximum) {
-        if (inv.rawMats<max.maxRawMats){
-            if (inv.rawMats + this.rawMatsperTick > max.maxRawMats)
-                inv.rawMats = max.maxRawMats;
-            else inv.rawMats += this.rawMatsperTick;
+    tick (inv:Inventory) {
+        if (inv.rawMats.amt<inv.rawMats.max){
+            if (inv.rawMats.amt + inv.rawMats.tick > inv.rawMats.max)
+                inv.rawMats.amt = inv.rawMats.max;
+            else inv.rawMats.amt += inv.rawMats.tick;
         }
     }
 }

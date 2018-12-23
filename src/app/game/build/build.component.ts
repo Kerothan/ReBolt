@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Inventory } from 'src/app/models/inventory';
 import { GameService } from 'src/app/services/game.service';
+import { buyCategories } from 'src/app/models/details';
 
 @Component({
   selector: 'app-build',
@@ -17,11 +18,16 @@ export class BuildComponent implements OnInit {
   }
 
   buy(item:string){
-    this.gameSvc.buy(item,this.inv);
+    this.gameSvc.buy(item,this.inv,buyCategories.struct);
   }
 
   validateBuy(item:string):boolean{
-    return this.gameSvc.validateBuy(item,this.inv);
+    return this.gameSvc.validateBuy(item,this.inv,buyCategories.struct);
+  }
+
+  isCat(cat:string,check:string):boolean{
+    if (cat==check) return true;
+    return false;
   }
   
 }

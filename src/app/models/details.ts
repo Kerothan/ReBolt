@@ -1,3 +1,10 @@
+export interface iInv {
+    amt: number;
+    max: number;
+    tick: number;
+    dispName: string;
+}
+
 interface InvCost {
     rawMats?: number;
     iron?: number;
@@ -5,6 +12,7 @@ interface InvCost {
     oil?: number;
     fuel?: number;
     weapons?: number;
+    scrap?: number;
 }
 
 interface StaticCost {
@@ -29,7 +37,6 @@ interface Provides {
     oilPerTick?: number;
     fuelPerTick?: number;
     weaponsPerTick?: number;
-    power?: number;
 }
 
 interface Uses {
@@ -48,6 +55,7 @@ interface Storage {
     oil?: number;
     fuel?: number;
     weapons?: number;
+    power?: number;
 }
 interface Reset {
     scrap?: number,
@@ -77,4 +85,9 @@ export enum statGroups {
     uses = 'uses',
     storage = 'storage',
     rest = 'rest'
+}
+
+export enum buyCategories {
+    unit='units',
+    struct='structs'
 }
