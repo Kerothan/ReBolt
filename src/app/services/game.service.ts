@@ -35,7 +35,7 @@ export class GameService {
         break;
       case statGroups.staticCost:
         this.genArray(purchasereq).forEach(mat=>{
-          if (purchasereq[mat].amt>(inv[purchasereq[mat].res]-inv[purchasereq[mat].amt]))
+          if (purchasereq[mat].amt>(inv[purchasereq[mat].res]-inv[mat]))
             valid= false;
         })
         break;
