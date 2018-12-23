@@ -1,11 +1,21 @@
 interface InvCost {
     rawMats?: number;
-    power?: number;
     iron?: number;
     coal?: number;
     oil?: number;
     fuel?: number;
     weapons?: number;
+}
+
+interface StaticCost {
+    usedPower?: {
+        'amt':number;
+        'res':string;
+    }
+    usedSpace?: {
+        'amt':number;
+        'res':string;
+    }
 }
 
 interface UnitCost {
@@ -29,8 +39,6 @@ interface Uses {
     oilPerTick?: number;
     fuelPerTick?: number;
     weaponsPerTick?: number;
-    power?: number;
-    space?: number;
 }
 
 interface Storage {
@@ -47,7 +55,9 @@ interface Reset {
 }
 
 export interface BuildDetails {
+    count: number;
     invCost: InvCost;
+    staticCost?: StaticCost;
     unitCost?: UnitCost;
     provides?: Provides;
     uses?: Uses;
@@ -57,4 +67,14 @@ export interface BuildDetails {
 
 export interface BuildSet {
     [key: string]: BuildDetails;
+}
+
+export enum statGroups {
+    invCost = 'invCost',
+    staticCost = 'staticCost',
+    unitCost = 'unitCost',
+    provides = 'provides',
+    uses = 'uses',
+    storage = 'storage',
+    rest = 'rest'
 }

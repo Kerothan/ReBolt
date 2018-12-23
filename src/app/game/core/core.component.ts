@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Inventory } from 'src/app/models/inventory';
 import { Core } from 'src/app/models/core';
-import { Units } from 'src/app/models/units';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-core',
@@ -12,12 +12,8 @@ export class CoreComponent implements OnInit {
 
   @Input() inv: Inventory;
   @Input() core: Core;
-  @Input() unit: Units;
   
-  droneCost:number = 2;
-  droneSpace:number = .5;
-
-  constructor() { }
+  constructor(private gameSvc:GameService) { }
 
   ngOnInit() {
   }
@@ -25,18 +21,14 @@ export class CoreComponent implements OnInit {
   /**
    * Validates whether or not the Construct Drone button should be active
    */
-  buyDroneValid():boolean {
-    if (this.droneCost <= this.inv.rawMats 
-      && this.droneSpace <= this.core.space-this.core.usedSpace) return true;
-    else return false;
+  buyDroneValid(item:string):boolean {
+    return this.gameSvc.validateBuy(item,this.inv);
   }
 
   /**
    * Adds a drone at the cost of mats and space
    */
-  buyDrone() {
-    this.inv.rawMats -= this.droneCost;
-    this.unit.counts.drones += 1;
-    this.core.useSpace(.5);
+  buyDrone(item:string) {
+    this.gameSvc.buy(item,this.inv);
   }
 }

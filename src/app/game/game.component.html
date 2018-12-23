@@ -2,10 +2,10 @@
   <strong>STATS!!!</strong><br/><br/>
   Core Level: {{core.level}}<br/>
   Raw materials: {{inventory.rawMats}}/{{max.maxRawMats}}<br/><br/>
-  Used space: {{core.usedSpace}}/{{core.space}}<br/><br/>  
-  Drones: {{units.drones}}<br/><br/>
-  diggers: {{structures.counts.digger}}<br/>
-  crates: {{structures.counts.crates}}
+  Used space: {{inventory.usedSpace}}/{{inventory.space}}<br/><br/>  
+  Drones: {{inventory.builds.drones.count}}<br/><br/>
+  diggers: {{inventory.builds.digger.count}}<br/>
+  crates: {{inventory.builds.crates.count}}
 
   <br/>
   Available power: {{inventory.power}}<br/>
@@ -14,12 +14,12 @@
   <ngx-tabset>
     <ngx-tab tabTitle="Processing Core">
       
-        <app-core [inv]="inventory" [core]="core" [unit]="units"></app-core>
+        <app-core [inv]="inventory" [core]="core"></app-core>
       
     </ngx-tab>
     <ngx-tab tabTitle="Construction">
       
-        <app-build [structures]="structures" [inv]="inventory" (buyOutput)="buy($event)"></app-build>
+        <app-build [inv]="inventory"></app-build>
       
     </ngx-tab>
     <ngx-tab tabTitle="Research">
