@@ -12,7 +12,7 @@ export class BuildComponent implements OnInit {
 
   @Input() inv: Inventory
 
-  constructor(private gameSvc: GameService) { }
+  constructor(public gameSvc: GameService) { }
 
   ngOnInit() {
   }
