@@ -90,7 +90,7 @@ export class Inventory {
             'provides':{
                 'rawMats':2,
                 'coal':.5,
-                'iron':.2
+                'iron':.5
             }
         },
         'drill':{

@@ -1,7 +1,9 @@
 <div id="sidebar">
   <strong>STATS!!!</strong><br/><br/>
-  Core Level: {{core.level}}<br/>
-  Raw materials: {{inventory.mats.rawMats.amt}}/{{inventory.mats.rawMats.max}}<br/><br/>
+  Core Level: {{core.level}}<br/><br/>
+  <span *ngFor="let mat of invList"> {{inventory.mats[mat].dispName}}: {{inventory.mats[mat].amt}}/{{inventory.mats[mat].max}}<br/></span>
+  <br/>
+
   Used space: {{inventory.usedSpace}}/{{inventory.space}}<br/><br/>  
   Drones: {{inventory.units.drones.count}}<br/><br/>
   diggers: {{inventory.structs.digger.count}}<br/>
