@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { Inventory } from '../models/inventory';
 import { Core } from '../models/core';
-import { Tick } from '../models/tick';
 import { GameService } from '../services/game.service';
 
 @Component({
@@ -16,17 +15,14 @@ export class GameComponent implements OnInit {
   inventory: Inventory = new Inventory();
   invList: string[];
   core: Core = new Core();
-  ticker: Tick;
   
   //timer to tick resources every second
-  private source;
+  private source = timer(1000,1000);
   private subscribe;
   
   constructor(private gameSvc: GameService) {
     this.invList = this.gameSvc.genArray(this.inventory.mats);
-    this.ticker = new Tick(gameSvc);
-    this.source = timer(1000,1000);
-    this.subscribe = this.source.subscribe(() => this.ticker.tick(this.inventory));
+    this.subscribe = this.source.subscribe(() => this.gameSvc.tick(this.inventory));
   }
 
   ngOnInit() {

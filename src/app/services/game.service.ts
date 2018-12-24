@@ -9,10 +9,21 @@ export class GameService {
 
   constructor() { }
 
+  /**
+   * given an object creates an array of all property keys.
+   * Required to itterate through object properties
+   * @param obj object to generate array from
+   */
   genArray(obj):any[]{
     return Object.keys(obj).map(key=>{return key})
   }
 
+  /**
+   * Validate whether an item can be purchased given current inventory
+   * @param purchase string value name of item to purchase
+   * @param inv global inventory object
+   * @param cat category if item to purchase 
+   */
   validateBuy(purchase:string,inv:Inventory,cat:buyCategories):boolean{
     let valid: boolean = true;
     if (purchase != 'drones' && inv.units.drones.count==0) return false;
@@ -44,6 +55,12 @@ export class GameService {
     return valid;;
   }
 
+  /**
+   * When item is purchased, calculate effects and adjust inventory accordingly
+   * @param purchase string value name of item to purchase
+   * @param inv global inventory object
+   * @param cat category if item to purchase
+   */
   buy(purchase:string,inv:Inventory,cat:buyCategories){
     this.genArray(inv[cat][purchase]).forEach(stat=>{
       let purchasereq=inv[cat][purchase][stat];
@@ -86,8 +103,28 @@ export class GameService {
     inv[cat][purchase].count+=1;
   }
 
+  /**
+   * If an item is used in production or sold, calculate the space to remove from usedSpace
+   * @param amt amount of space to release
+   * @param inv global inventory object
+   */
   releaseSpace(amt:number,inv:Inventory) {
     inv.usedSpace -= amt;
+  }
+
+  /**
+   * Updates inventory based on production per tick up to maximum
+   * @param inv global inventory object
+   */
+  tick (inv:Inventory) {
+    let mats = inv.mats
+    this.genArray(mats).forEach(mat => {
+        if (mats[mat].amt<mats[mat].max){
+            if (mats[mat].amt + mats[mat].tick > mats[mat].max)
+                mats[mat].amt = mats[mat].max;
+            else mats[mat].amt += mats[mat].tick;
+        }
+    });
   }
 
 }

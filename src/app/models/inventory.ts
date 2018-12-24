@@ -64,7 +64,7 @@ export class Inventory {
             },
             'reset':{
                 'scrap':1,
-                'space':0.1
+                'space':0.5
             }
         }
     }
@@ -91,6 +91,10 @@ export class Inventory {
                 'rawMats':2,
                 'coal':.5,
                 'iron':.5
+            },
+            'reset':{
+                'scrap':2,
+                'space':.5
             }
         },
         'drill':{
@@ -108,6 +112,10 @@ export class Inventory {
             },
             'unitCost':{
                 'drones':2
+            },
+            'reset':{
+                'scrap':4,
+                'space':2
             }
         },
     
@@ -128,6 +136,9 @@ export class Inventory {
                 'rawMats':20,
                 'coal':10,
                 'iron':10
+            },
+            'reset':{
+                'scrap':2
             }
         }
 
