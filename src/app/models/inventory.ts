@@ -1,43 +1,45 @@
-import { BuildSet, iInv } from "./details";
+import { BuildSet, iInv, MatSet } from "./details";
 
 export class Inventory {
     //incremental inventory
-    rawMats: iInv = {
-        'amt':0,
-        'max':100,
-        'tick':1,
-        'dispName':'Raw materials'
+    mats:MatSet = {
+        'rawMats': {
+            'amt':0,
+            'max':100,
+            'tick':1,
+            'dispName':'Raw materials'
+        },
+        'iron': {
+            'amt':0,
+            'max':20,
+            'tick':0,
+            'dispName':'Iron'
+        },
+        'coal':  {
+            'amt':0,
+            'max':20,
+            'tick':0,
+            'dispName':'Coal'
+        },
+        'oil': {
+            'amt':0,
+            'max':0,
+            'tick':0,
+            'dispName':'Oil'
+        },
+        'fuel': {
+            'amt':0,
+            'max':0,
+            'tick':0,
+            'dispName':'Fuel'
+        },
+        'weapons': {
+            'amt':0,
+            'max':5,
+            'tick':0,
+            'dispName':'Weapons'
+        }
     }
-    iron: iInv = {
-        'amt':0,
-        'max':20,
-        'tick':0,
-        'dispName':'Iron'
-    };
-    coal: iInv = {
-        'amt':0,
-        'max':20,
-        'tick':0,
-        'dispName':'Coal'
-    };
-    oil: iInv = {
-        'amt':0,
-        'max':0,
-        'tick':0,
-        'dispName':'Oil'
-    };
-    fuel: iInv = {
-        'amt':0,
-        'max':0,
-        'tick':0,
-        'dispName':'Fuel'
-    };
-    weapons: iInv = {
-        'amt':0,
-        'max':5,
-        'tick':0,
-        'dispName':'Weapons'
-    };
 
     //static inventory
     power: number;
@@ -49,6 +51,7 @@ export class Inventory {
     units: BuildSet={
         //units
         'drones':{
+            'unlocked':true,
             'count':0,
             'invCost':{
                 'rawMats':2,
@@ -70,6 +73,7 @@ export class Inventory {
         //structures
         //resource gathering
         'digger':{
+            'unlocked':true,
             'count':0,
             'invCost':{
                 'rawMats':5,
@@ -84,11 +88,13 @@ export class Inventory {
                 'drones':1
             },
             'provides':{
-                'rawMatsperTick':2,
-                'coalPerTick':.5
+                'rawMats':2,
+                'coal':.5,
+                'iron':.2
             }
         },
         'drill':{
+            'unlocked':false,
             'count':0,
             'invCost':{
                 'rawMats':20,
@@ -107,6 +113,7 @@ export class Inventory {
     
         //storage structures
         'crates':{
+            'unlocked':true,
             'count':0,
             'invCost':{
                 'rawMats':15,
@@ -132,13 +139,13 @@ export class Inventory {
     }
 
     constructor (rawMats=0,power=10,iron=0,coal=0,oil=0,fuel=0,weapons=0,space=25,usedSpace=0,usedPower=0) {
-        this.rawMats.amt=rawMats;
+        this.mats.rawMats.amt=rawMats;
         this.power=power;
-        this.iron.amt=iron;
-        this.coal.amt=coal;
-        this.oil.amt=oil;
-        this.fuel.amt=fuel;
-        this.weapons.amt=weapons;
+        this.mats.iron.amt=iron;
+        this.mats.coal.amt=coal;
+        this.mats.oil.amt=oil;
+        this.mats.fuel.amt=fuel;
+        this.mats.weapons.amt=weapons;
         this.space=space;
         this.usedPower=usedPower;
         this.usedSpace=usedSpace;

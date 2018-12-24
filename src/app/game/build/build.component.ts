@@ -19,6 +19,7 @@ export class BuildComponent implements OnInit {
 
   buy(item:string){
     this.gameSvc.buy(item,this.inv,buyCategories.struct);
+    if (item=='digger') this.inv.structs.drill.unlocked = true;
   }
 
   validateBuy(item:string):boolean{

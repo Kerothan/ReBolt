@@ -31,21 +31,21 @@ interface UnitCost {
 }
 
 interface Provides {
-    rawMatsperTick?: number;
-    ironPerTick?: number;
-    coalPerTick?: number;
-    oilPerTick?: number;
-    fuelPerTick?: number;
-    weaponsPerTick?: number;
+    rawMats?: number;
+    iron?: number;
+    coal?: number;
+    oil?: number;
+    fuel?: number;
+    weapons?: number;
 }
 
 interface Uses {
-    rawMatsperTick?: number;
-    ironPerTick?: number;
-    coalPerTick?: number;
-    oilPerTick?: number;
-    fuelPerTick?: number;
-    weaponsPerTick?: number;
+    rawMats?: number;
+    iron?: number;
+    coal?: number;
+    oil?: number;
+    fuel?: number;
+    weapons?: number;
 }
 
 interface Storage {
@@ -63,6 +63,7 @@ interface Reset {
 }
 
 export interface BuildDetails {
+    unlocked:boolean;
     count: number;
     invCost: InvCost;
     staticCost?: StaticCost;
@@ -75,6 +76,10 @@ export interface BuildDetails {
 
 export interface BuildSet {
     [key: string]: BuildDetails;
+}
+
+export interface MatSet{
+    [key:string]: iInv;
 }
 
 export enum statGroups {
@@ -90,4 +95,14 @@ export enum statGroups {
 export enum buyCategories {
     unit='units',
     struct='structs'
+}
+
+export enum invTypes {
+    rawMats = 'rawMats',
+    iron = 'iron',
+    coal = 'coal',
+    oil = 'oil',
+    fuel = 'fuel',
+    weapons = 'weapons',
+    scrap = 'scrap'
 }

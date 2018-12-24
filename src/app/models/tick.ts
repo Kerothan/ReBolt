@@ -1,21 +1,9 @@
 import { Inventory } from "./inventory";
+import { GameService } from "../services/game.service";
 
 export class Tick {
-    rawMatsperTick: number;
-    ironPerTick: number;
-    coalPerTick: number;
-    oilPerTick: number;
-    fuelPerTick: number;
-    weaponsPerTick: number;
-
-    constructor (rawMatsperTick=1,ironPerTick=0,coalPerTick=0,oilPerTick=0,fuelPerTick=0,weaponsPerTick=0){
-        this.rawMatsperTick=rawMatsperTick;
-        this.ironPerTick=ironPerTick;
-        this.coalPerTick=coalPerTick;
-        this.oilPerTick=oilPerTick;
-        this.fuelPerTick=fuelPerTick;
-        this.weaponsPerTick=weaponsPerTick;
-    }
+    
+    constructor (private gameSvc:GameService) {}
 
     /**
      * Updates inventory based on production per tick up to maximum
@@ -23,10 +11,13 @@ export class Tick {
      * @param max maximum object passed from game component
      */
     tick (inv:Inventory) {
-        if (inv.rawMats.amt<inv.rawMats.max){
-            if (inv.rawMats.amt + inv.rawMats.tick > inv.rawMats.max)
-                inv.rawMats.amt = inv.rawMats.max;
-            else inv.rawMats.amt += inv.rawMats.tick;
-        }
+        let mats = inv.mats
+        this.gameSvc.genArray(mats).forEach(mat => {
+            if (mats[mat].amt<mats[mat].max){
+                if (mats[mat].amt + mats[mat].tick > mats[mat].max)
+                    mats[mat].amt = mats[mat].max;
+                else mats[mat].amt += mats[mat].tick;
+            }
+        });
     }
 }

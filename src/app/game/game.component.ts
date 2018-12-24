@@ -15,13 +15,17 @@ export class GameComponent implements OnInit {
   //instantiate models
   inventory: Inventory = new Inventory();
   core: Core = new Core();
-  ticker: Tick = new Tick();
-
-  //timer to tick resources every second
-  private source = timer(1000,1000);
-  private subscribe = this.source.subscribe(() => this.ticker.tick(this.inventory))
+  ticker: Tick;
   
-  constructor(private gameSvc: GameService) { }
+  //timer to tick resources every second
+  private source;
+  private subscribe;
+  
+  constructor(private gameSvc: GameService) {
+    this.ticker = new Tick(gameSvc);
+    this.source = timer(1000,1000);
+    this.subscribe = this.source.subscribe(() => this.ticker.tick(this.inventory));
+  }
 
   ngOnInit() {
   }
