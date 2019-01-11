@@ -1,27 +1,31 @@
 <div id="sidebar">
   <strong>STATS!!!</strong><br/><br/>
   Core Level: {{core.level}}<br/><br/>
-  <span *ngFor="let mat of invList"> {{inventory.mats[mat].dispName}}: {{inventory.mats[mat].amt}}/{{inventory.mats[mat].max}}<br/></span>
+  <ng-container *ngFor="let mat of invList">
+    <span *ngIf="gameSvc.inv.mats[mat].unlocked"> {{gameSvc.inv.mats[mat].dispName}}: {{gameSvc.inv.mats[mat].amt}}/{{gameSvc.inv.mats[mat].max}}<br/></span>
+  </ng-container>
   <br/>
 
-  Used space: {{inventory.usedSpace}}/{{inventory.space}}<br/><br/>  
-  Drones: {{inventory.units.drones.count}}<br/><br/>
-  diggers: {{inventory.structs.digger.count}}<br/>
-  crates: {{inventory.structs.crates.count}}
+  Used space: {{gameSvc.inv.usedSpace}}/{{gameSvc.inv.space}}<br/><br/>  
+  Drones: {{gameSvc.inv.units.drones.count}}<br/><br/>
+  diggers: {{gameSvc.inv.structs.digger.count}}<br/>
+  crates: {{gameSvc.inv.structs.crates.count}}
 
   <br/>
-  Available power: {{inventory.power}}<br/>
+  Available power: {{gameSvc.inv.power}}<br/>
+
+  <button (click)="reInit()">reInit</button>
 </div>
 <div id="gameview">
   <ngx-tabset>
     <ngx-tab tabTitle="Processing Core">
       
-        <app-core [inv]="inventory" [core]="core"></app-core>
+        <app-core></app-core>
       
     </ngx-tab>
     <ngx-tab tabTitle="Construction">
       
-        <app-build [inv]="inventory"></app-build>
+        <app-build></app-build>
       
     </ngx-tab>
     <ngx-tab tabTitle="Research">

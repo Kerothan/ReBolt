@@ -1,4 +1,5 @@
 export interface iInv {
+    unlocked: boolean;
     amt: number;
     max: number;
     tick: number;
@@ -30,15 +31,6 @@ interface UnitCost {
     drones?: number;
 }
 
-interface Provides {
-    rawMats?: number;
-    iron?: number;
-    coal?: number;
-    oil?: number;
-    fuel?: number;
-    weapons?: number;
-}
-
 interface Uses {
     rawMats?: number;
     iron?: number;
@@ -57,7 +49,7 @@ interface Storage {
     weapons?: number;
     power?: number;
 }
-interface Reset {
+export interface Reset {
     scrap?: number,
     space?: number
 }
@@ -68,7 +60,7 @@ export interface BuildDetails {
     invCost: InvCost;
     staticCost?: StaticCost;
     unitCost?: UnitCost;
-    provides?: Provides;
+    provides?: Uses;
     uses?: Uses;
     storage?: Storage;
     reset?: Reset;

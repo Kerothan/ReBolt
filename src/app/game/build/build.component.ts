@@ -10,20 +10,18 @@ import { buyCategories } from 'src/app/models/details';
 })
 export class BuildComponent implements OnInit {
 
-  @Input() inv: Inventory
-
   constructor(public gameSvc: GameService) { }
 
   ngOnInit() {
   }
 
   buy(item:string){
-    this.gameSvc.buy(item,this.inv,buyCategories.struct);
-    if (item=='digger') this.inv.structs.drill.unlocked = true;
+    this.gameSvc.buy(item,buyCategories.struct);
+    if (item=='digger') this.gameSvc.inv.structs.drill.unlocked = true;
   }
 
   validateBuy(item:string):boolean{
-    return this.gameSvc.validateBuy(item,this.inv,buyCategories.struct);
+    return this.gameSvc.validateBuy(item,buyCategories.struct);
   }
 
   isCat(cat:string,check:string):boolean{

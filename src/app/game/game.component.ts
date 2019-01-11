@@ -12,7 +12,6 @@ import { GameService } from '../services/game.service';
 export class GameComponent implements OnInit {
 
   //instantiate models
-  inventory: Inventory = new Inventory();
   invList: string[];
   core: Core = new Core();
   
@@ -21,11 +20,16 @@ export class GameComponent implements OnInit {
   private subscribe;
   
   constructor(private gameSvc: GameService) {
-    this.invList = this.gameSvc.genArray(this.inventory.mats);
-    this.subscribe = this.source.subscribe(() => this.gameSvc.tick(this.inventory));
+    
   }
 
   ngOnInit() {
+    this.invList = this.gameSvc.genArray(this.gameSvc.inv.mats);
+    this.subscribe = this.source.subscribe(() => this.gameSvc.tick());
+  }
+
+  reInit(){
+    this.gameSvc.init();
   }
 
 }

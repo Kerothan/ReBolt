@@ -1,21 +1,21 @@
 <h1>BUILD STUFF!!!</h1>
-<ng-container *ngFor="let struct of gameSvc.genArray(this.inv.structs)">
-  <ng-container *ngIf="inv.structs[struct].unlocked">
+<ng-container *ngFor="let struct of gameSvc.genArray(this.gameSvc.inv.structs)">
+  <ng-container *ngIf="gameSvc.inv.structs[struct].unlocked">
     <div class="buildbubble">
       <div class="name">{{struct}}</div>
       <div class="cost">
         <strong>Cost</strong>
         <ul>
-          <ng-container *ngFor="let cat of gameSvc.genArray(this.inv.structs[struct])">
+          <ng-container *ngFor="let cat of gameSvc.genArray(this.gameSvc.inv.structs[struct])">
             <ng-container *ngIf="isCat(cat,'invCost')">
-              <li *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">{{inv.mats[comp].dispName}}: {{inv.structs[struct][cat][comp]}}</li>
+              <li *ngFor="let comp of gameSvc.genArray(this.gameSvc.inv.structs[struct][cat])">{{gameSvc.inv.mats[comp].dispName}}: {{gameSvc.inv.structs[struct][cat][comp]}}</li>
             </ng-container>
             <ng-container *ngIf="isCat(cat,'unitCost')">
-              <li *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">{{comp}}: {{inv.structs[struct][cat][comp]}}</li>
+              <li *ngFor="let comp of gameSvc.genArray(this.gameSvc.inv.structs[struct][cat])">{{comp}}: {{gameSvc.inv.structs[struct][cat][comp]}}</li>
             </ng-container>
             <ng-container *ngIf="isCat(cat,'staticCost')">
-              <li *ngFor="let comp of gameSvc.genArray(this.inv.structs[struct][cat])">
-                {{inv.structs[struct][cat][comp].res}}: {{inv.structs[struct][cat][comp].amt}}
+              <li *ngFor="let comp of gameSvc.genArray(this.gameSvc.inv.structs[struct][cat])">
+                {{gameSvc.inv.structs[struct][cat][comp].res}}: {{gameSvc.inv.structs[struct][cat][comp].amt}}
               </li>
             </ng-container>
           </ng-container>
